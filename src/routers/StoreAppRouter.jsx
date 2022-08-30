@@ -6,7 +6,6 @@ import { AppTheme } from '../ui/theme/AppTheme';
 
 const StoreAppRouter = () => {
     const { status } = useSelector(state => state.auth);
-    console.log(status);
 
     if(status === 'checking'){
         return <CheckAuth />
@@ -20,7 +19,6 @@ const StoreAppRouter = () => {
                     ? <Route path='/*' element={ <StoreRoutes /> }/>
                     : <Route path='/auth/*' element={ <AuthRoutes /> } />
                 }
-
                 <Route path='/*' element={ <Navigate to='/auth/' /> }/>
             </Routes>
         </AppTheme>
