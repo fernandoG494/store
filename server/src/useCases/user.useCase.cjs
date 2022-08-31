@@ -42,8 +42,13 @@ async function getUsers() {
     return users;
 }
 
+async function getUserById(id) {
+    return UserModel.findById(id);
+}
+
 module.exports = {
     createUser,
     getUserExists,
-    getUsers
+    getUsers,
+    getUserById
 };
