@@ -9,6 +9,10 @@ async function createUser(userData){
     };
 
     console.log('use case >', displayName, email, password);
+    /* 
+        TODO - finish the creation using bcrypt and create mongo function.
+        Guide -> https://github.com/fernandoG494/pet-project/blob/main/server/src/usecases/user.usecase.cjs
+    */ 
 };
 
 async function getUserExists(email){

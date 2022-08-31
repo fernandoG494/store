@@ -12,6 +12,10 @@ router.post('/', async(request, response) => {
         if(!userExist){
             const newUser = await createUser(userData);
             
+            /**
+                return response with unew user.
+                Guide -> https://github.com/fernandoG494/pet-project/blob/main/server/src/routes/user.route.cjs
+             */
         }else{
             response.status(201).json({
                 status: 201,
