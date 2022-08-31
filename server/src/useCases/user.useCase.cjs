@@ -1,5 +1,6 @@
 const UserModel = require('../models/user.model.cjs');
 const createError = require('http-errors');
+const bcrypt = require('bcrypt');
 
 async function createUser(userData){
     const {displayName, email, password} = userData;
@@ -8,11 +9,23 @@ async function createUser(userData){
         throw new createError('400', 'Missing required fields');
     };
 
-    console.log('use case >', displayName, email, password);
-    /* 
-        TODO - finish the creation using bcrypt and create mongo function.
-        Guide -> https://github.com/fernandoG494/pet-project/blob/main/server/src/usecases/user.usecase.cjs
-    */ 
+    const hashPass = await bcrypt.hash(password, 15);
+    const date = new Date();
+
+    userData.password = hashPass;
+    userData.createdAt = date;
+    userData.updatedAt = date;
+    userData.role = 'user';
+
+    const newUser = new UserModel({
+        email,
+        hashPass,
+        displayName,
+        date,
+        date
+    });
+
+    return UserModel.create(userData);
 };
 
 async function getUserExists(email){

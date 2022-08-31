@@ -1,4 +1,5 @@
 const express = require('express');
+const userModel = require('../models/user.model.cjs');
 const { getUserExists, createUser } = require('../usecases/user.usecase.cjs');
 const router = express.Router();
 
@@ -12,10 +13,12 @@ router.post('/', async(request, response) => {
         if(!userExist){
             const newUser = await createUser(userData);
             
-            /**
-                return response with unew user.
-                Guide -> https://github.com/fernandoG494/pet-project/blob/main/server/src/routes/user.route.cjs
-             */
+            response.status(201).json({
+                status: 201,
+                message: 'User created successfully',
+                data: newUser
+            });
+            
         }else{
             response.status(201).json({
                 status: 201,
