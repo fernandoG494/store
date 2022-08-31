@@ -1,6 +1,6 @@
 const express = require('express');
 const userModel = require('../models/user.model.cjs');
-const { getUserExists, createUser } = require('../usecases/user.usecase.cjs');
+const { getUserExists, createUser, getUsers } = require('../usecases/user.usecase.cjs');
 const router = express.Router();
 
 // CREATE USER
@@ -35,4 +35,32 @@ router.post('/', async(request, response) => {
     };
 });
 
+
+//GET ALL USERS
+router.get('/all', async (request, response) => {
+    try {
+        const users = await getUsers();
+
+        if(users.length === 0) {
+            response.status(201).json({
+                status: 201,
+                message: "Users don't exist"
+            });
+
+        } else {
+            response.status(201).json({
+                status: 201,
+                data: users
+            });
+        }
+        
+
+    } catch (error) {
+        response.status(error.status || 500);
+        response.json({
+            error: error.message,
+            message: 'Error getting user'
+        });
+    }
+});
 module.exports = router;

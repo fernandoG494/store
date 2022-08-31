@@ -37,7 +37,13 @@ async function getUserExists(email){
     return true;
 };
 
+async function getUsers() {
+    const users = UserModel.find();
+    return users;
+}
+
 module.exports = {
     createUser,
-    getUserExists
+    getUserExists,
+    getUsers
 };
