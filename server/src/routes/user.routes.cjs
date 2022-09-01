@@ -1,8 +1,11 @@
-const { Router } = require('express');
 const express = require('express');
-const userModel = require('../models/user.model.cjs');
-const { getUserExists, createUser, getUsers, getUserById } = require('../usecases/user.usecase.cjs');
 const router = express.Router();
+const {
+    getUserExists,
+    createUser,
+    getUsers,
+    getUserById
+} = require('../usecases/user.usecase.cjs');
 
 // CREATE USER
 router.post('/', async(request, response) => {
@@ -14,8 +17,8 @@ router.post('/', async(request, response) => {
         if(!userExist){
             const newUser = await createUser(userData);
             
-            response.status(201).json({
-                status: 201,
+            response.status(200).json({
+                status: 200,
                 message: 'User created successfully',
                 data: newUser
             });
@@ -38,60 +41,47 @@ router.post('/', async(request, response) => {
 
 
 //GET ALL USERS
-router.get('/all', async (request, response) => {
+router.get('/', async (request, response) => {
     try {
         const users = await getUsers();
 
-        if(users.length === 0) {
-            response.status(201).json({
-                status: 201,
-                message: "Users don't exist"
-            });
-
-        } else {
-            response.status(201).json({
-                status: 201,
+        if(users.length > 0) {
+            response.status(200).json({
+                status: 200,
                 data: users
             });
-        }
-        
-
+        };
     } catch (error) {
         response.status(error.status || 500);
         response.json({
             error: error.message,
-            message: 'Error getting user'
+            message: 'Error getting users'
         });
     }
 });
 
 //GET USER BY ID
-router.get('/', async (request, response) => {
+router.get('/:id', async (request, response) => {
+    const { id } = request.params;
+    console.log(`GET /users/${id}`);
+    
     try {
-        const id = request.body.id;
         const user = await getUserById(id);
 
-        if(!user) {
-            response.status(201).json({
-                status: 201,
-                message: "User don't exist"
-            });
-
-        } else {
-            response.status(201).json({
-                status: 201,
+        if(user){
+            console.log(user);
+            response.status(200).json({
+                status: 200,
                 data: user
             });
         }
-
-        
     } catch (error) {
         response.status(error.status || 500);
         response.json({
             error: error.message,
             message: 'Error getting user'
         });
-    }
-})
+    };
+});
 
 module.exports = router;
