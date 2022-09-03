@@ -50,11 +50,29 @@ async function getUserById(id) {
     return UserModel.findById(id);
 };
 
-// TODO - LOGIN WITH EMAIL AND PASSWORD
+async function getUserByEmail(email) {
+    return UserModel.findOne({email});
+}
+
+
+async function login(email, password) {
+    const user = await getUserByEmail(email);
+
+    if(!user) return;
+
+    const isValidPassword =  await bcrypt.compare(password, user.password);
+
+    console.log(isValidPassword);
+    
+    if(!isValidPassword) return;
+
+    return user;
+};
 
 module.exports = {
     createUser,
     getUserExists,
     getUsers,
-    getUserById
+    getUserById,
+    login
 };
