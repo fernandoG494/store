@@ -1,7 +1,10 @@
+//* Route: /auth/
+
 const express = require('express');
 const router = express.Router();
-const {login} = require('../usecases/user.usecase.cjs');
+const { login } = require('../usecases/user.usecase.cjs');
 
+//* LOGIN USER
 router.post('/', async (request, response) => {
     const { email, password } = request.body;
 
