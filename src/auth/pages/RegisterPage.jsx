@@ -1,7 +1,9 @@
-import React, { useState, useMemo } from 'react';
-import { Alert, Button, Grid, TextField } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import 'sweetalert2/dist/sweetalert2.css';
 import { useForm } from '../../hooks/useForm';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Alert, Button, Grid, TextField } from '@mui/material';
+import { startCreatingUserPasswordEmail } from '../../store/auth/thunks';
 
 const formData = {
     email: '',
@@ -22,10 +24,11 @@ const formValidators = {
 };
 
 export const RegisterPage = () => {
+    const dispatch = useDispatch();
+    
     const [formSubmited, setFormSubmited] = useState(false);
-
-    const { status, errorMessage } = useSelector(state => state.auth);
-    const isCheckingAuthentication = useMemo|(() => status === 'checking', [status]);
+    const { status, message } = useSelector(state => state.auth);
+    const isCheckingAuthentication = useMemo(() => status === 'checking', [status]);
 
     const { 
         formState, displayName, email, password, onInputChange,
@@ -36,10 +39,10 @@ export const RegisterPage = () => {
         event.preventDefault();
         setFormSubmited(true);
         if ( !isFormValid ) return;
-
-        console.log(formState);
+        dispatch(startCreatingUserPasswordEmail(formState));
     };
 
+    
     return (
         <form onSubmit={onSubmit} >
             <Grid container>
@@ -87,9 +90,9 @@ export const RegisterPage = () => {
                     <Grid
                         item 
                         xs={ 12 }
-                        display={ !!errorMessage ? '': 'none' }
+                        display={ !!message ? '': 'none' }
                     >
-                        <Alert severity='error'>{ errorMessage }</Alert>
+                        <Alert severity='error'>{ message }</Alert>
                     </Grid>
                     <Grid item xs={ 12 }>
                         <Button

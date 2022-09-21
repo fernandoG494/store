@@ -12,20 +12,19 @@ async function createUser(userData){
     const hashPass = await bcrypt.hash(password, 15);
     const date = new Date();
 
-    userData.password = hashPass;
     userData.createdAt = date;
     userData.updatedAt = date;
-    userData.role = 'user';
 
     const newUser = new UserModel({
-        email,
-        hashPass,
-        displayName,
-        date,
-        date
+        'email': email,
+        'password': hashPass,
+        'displayName': displayName,
+        'createdAt': userData.createdAt,
+        'updatedAt': userData.updatedAt,
+        'role': 'user',
     });
 
-    return UserModel.create(userData);
+    return UserModel.create(newUser);
 };
 
 async function getUserExists(email){
@@ -40,15 +39,38 @@ async function getUserExists(email){
 async function getUsers() {
     const users = UserModel.find();
     return users;
-}
+};
+
+// const getUsers = async() => {
+//     const users = UserModel.find();
+//     return users;
+// };
 
 async function getUserById(id) {
     return UserModel.findById(id);
+};
+
+async function getUserByEmail(email) {
+    return UserModel.findOne({email});
 }
+
+
+async function login(email, password) {
+    const user = await getUserByEmail(email);
+
+    if(!user) return;
+
+    const isValidPassword =  await bcrypt.compare(password, user.password);
+    
+    if(!isValidPassword) return;
+
+    return user;
+};
 
 module.exports = {
     createUser,
     getUserExists,
     getUsers,
-    getUserById
+    getUserById,
+    login
 };

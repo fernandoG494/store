@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { Route, Routes, Navigate} from 'react-router-dom';
 import AuthRoutes from '../auth/routes/AuthRoutes';
 import { AppTheme } from '../ui/theme/AppTheme';
+import CheckAuth from '../ui/components/CheckAuth';
+import StoreRoutes from '../storeApp/routes/StoreRoutes';
 
 const StoreAppRouter = () => {
     const { status } = useSelector(state => state.auth);
