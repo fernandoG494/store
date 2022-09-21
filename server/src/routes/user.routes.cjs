@@ -69,7 +69,6 @@ router.get('/:id', async (request, response) => {
     try {
         const user = await getUserById(id);
         if(user){
-            console.log(user);
             response.status(200).json({
                 status: 200,
                 data: user
