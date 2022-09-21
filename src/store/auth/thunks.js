@@ -30,3 +30,25 @@ export const startCreatingUserPasswordEmail = ({ displayName, email, password })
         };
     };
 };
+
+export const loginUserWithPasswordAndEmail = ({ email, password }) => {
+    return async(dispatch) => {
+        dispatch(checkingCredentials());
+
+        const { data } = await api.post('/auth/', {
+            email, password
+        });
+
+        if(data.status === 200){
+            const { displayName, email, _id } = data.data;
+            dispatch(login({
+                authPage: 'login',
+                uid: _id,
+                email: email,
+                displayName: displayName,
+            }))
+        }else{
+            dispatch(logout({message: data.message}));   
+        };
+    };
+};

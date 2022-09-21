@@ -1,4 +1,3 @@
-import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import { useForm } from '../../hooks/useForm';
 import React, { useState, useMemo, useEffect } from 'react';
