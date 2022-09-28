@@ -2,6 +2,7 @@ import React from 'react';
 import { AppBar, Container, IconButton, MenuItem, Toolbar, Tooltip, Typography, Box, Menu, Button, ButtonBase, Avatar } from '@mui/material';
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
+import CarouselImg from '../components/Carousel';
 
 const pages = ['Accesorios', 'Ropa', 'Arte', 'Suministros'];
 const settings = ['Perfil', 'Mensajes', 'Ofertas', 'Configuración'];
@@ -27,7 +28,8 @@ const StorePage = () => {
     };
 
     return (
-        <AppBar position="static">
+      <>
+      <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -148,6 +150,10 @@ const StorePage = () => {
         </Toolbar>
       </Container>
     </AppBar>
+
+        <CarouselImg />
+      </>
+      
     );
 };
 
