@@ -7,7 +7,7 @@ import CheckAuth from '../ui/components/CheckAuth';
 import StoreRoutes from '../storeApp/routes/StoreRoutes';
 
 const StoreAppRouter = () => {
-    const { status } = useSelector(state => state.auth);
+    const status = useCheckAuth();
 
     if(status === 'checking'){
         return <CheckAuth />
