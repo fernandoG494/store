@@ -1,0 +1,14 @@
+.money-symbol, .money-cost{
+    font-size: 2rem;
+    color: #00a650;
+}
+
+.money-cents {
+    font-size: 1rem;
+    color: #00a650;
+    margin-top: 4px;
+    margin-left: 2px;
+    position: absolute;
+    align-self: flex-start;
+    font-weight: 500;
+}

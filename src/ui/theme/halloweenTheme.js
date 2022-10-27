@@ -17,6 +17,12 @@ export const halloweenTheme = createTheme({
         },
         text: {
             main: '#000000'
+        },
+        iconCard: {
+            main: '#0a06e2',
+        },
+        money: {
+            main: '#00a650',
         }
     }
 });
