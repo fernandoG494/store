@@ -5,6 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CarouselImg from '../components/Carousel';
 import ProductsCarousel from '../components/ProductsCarousel'
 import products from '../utils/products'
+import PagesCard from '../components/PagesCard';
 
 const pages = ['Accesorios', 'Ropa', 'Arte', 'Suministros'];
 const settings = ['Perfil', 'Mensajes', 'Ofertas', 'Configuración'];
@@ -156,6 +157,7 @@ const StorePage = () => {
         <CarouselImg />
         <ProductsCarousel title={'Popular products'} products={products} />
         <ProductsCarousel title={'Accessories'} products={products} time={3000} />
+        <PagesCard />
       </>
       
     );
