@@ -3,6 +3,8 @@ import { AppBar, Container, IconButton, MenuItem, Toolbar, Tooltip, Typography, 
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
 import CarouselImg from '../components/Carousel';
+import ProductsCarousel from '../components/ProductsCarousel'
+import products from '../utils/products'
 
 const pages = ['Accesorios', 'Ropa', 'Arte', 'Suministros'];
 const settings = ['Perfil', 'Mensajes', 'Ofertas', 'Configuración'];
@@ -152,6 +154,8 @@ const StorePage = () => {
     </AppBar>
 
         <CarouselImg />
+        <ProductsCarousel title={'Popular products'} products={products} />
+        <ProductsCarousel title={'Accessories'} products={products} time={3000} />
       </>
       
     );

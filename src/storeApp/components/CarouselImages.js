@@ -1,4 +1,4 @@
-const path = './src/storeApp/ImagesProducts/';
+const path = './src/storeApp/images/carousel/';
 
 const CarouselProducts = [
     {
